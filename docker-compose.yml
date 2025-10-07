@@ -1,9 +1,9 @@
 services:
-  reactcomponent:
+  reactcomponents:
     build:
       context: .
       dockerfile: ./dockerfiles/node/Dockerfile
-    container_name: reactcomponent
+    container_name: reactcomponents
     volumes:
       - ./projects/node:/home/node/project
     ports:
