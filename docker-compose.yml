@@ -1,0 +1,14 @@
+services:
+  reactcomponent:
+    build:
+      context: .
+      dockerfile: ./dockerfiles/node/Dockerfile
+    container_name: reactcomponent
+    volumes:
+      - ./projects/node:/home/node/project
+    ports:
+      - 24000:3000
+    tty: true
+    stdin_open: true
+    working_dir: /home/node/project/
+    command: "npm run dev"
