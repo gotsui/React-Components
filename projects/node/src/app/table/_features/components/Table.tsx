@@ -28,7 +28,7 @@ const Table = ({
                         <tr className="bg-gray-200">
                             {columnDefs.map((def) => (
                                 <th key={def.field} className="px-4 py-2 border-t border-r border-b text-xs">
-                                    {def.lable ?? def.field}
+                                    {def.label ?? def.field}
                                 </th>
                             ))}
                         </tr>

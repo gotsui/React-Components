@@ -1,6 +1,6 @@
 export type ColumnDef = {
     field: string;
-    lable?: string;
+    label?: string;
     filter?: boolean;
     sortable?: boolean;
 };

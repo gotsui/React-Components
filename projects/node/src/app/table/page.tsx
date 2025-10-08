@@ -2,9 +2,9 @@ import Table from "./_features/components/Table";
 
 const TablePage = () => {
     const columnDefs = [
-        {headerName: "Make", field: "make"},
-        {headerName: "Model", field: "model"},
-        {headerName: "Price", field: "price"}
+        {label: "Make", field: "make"},
+        {label: "Model", field: "model"},
+        {label: "Price", field: "price"}
     ];
 
     const rowData = [
