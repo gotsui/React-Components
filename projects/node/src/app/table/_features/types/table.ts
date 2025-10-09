@@ -5,10 +5,6 @@ export type ColumnDef = {
     sortable?: boolean;
 };
 
-export type ColumnDefs = ColumnDef[];
-
 export type Row = {
     [k: string]: boolean | number | string;
 };
-
-export type RowData = Row[];
