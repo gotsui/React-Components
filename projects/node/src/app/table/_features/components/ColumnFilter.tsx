@@ -45,6 +45,9 @@ const ColumnFilter = ({
                     <path d="M6 12h12" />
                     <path d="M9 19h6" />
                 </svg>
+                {getColumnFilterItems(field).some((item) => !item.checked) && (
+                    <span className="top-[-3] start-2.5 absolute w-2.5 h-2.5 bg-green-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
+                )}
             </button>
             <div
                 id={`filter-${field}`}
