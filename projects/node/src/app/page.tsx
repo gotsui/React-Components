@@ -15,6 +15,17 @@ const Home = () => {
                         Table
                     </div>
                 </Link>
+                <Link
+                    href="/tableprovider"
+                    className="
+                        p-4 border rounded-lg shadow-md
+                        hover:bg-gray-100 overflow-hidden
+                    "
+                >
+                    <div className="text-xl font-semibold">
+                        Table Provider
+                    </div>
+                </Link>
             </div>
         </div>
     );
