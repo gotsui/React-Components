@@ -38,7 +38,8 @@ const ColumnFilter = ({
             <button
                 type="button"
                 className={[
-                    "relative inline-flex items-center ml-2 hover:text-blue-600",
+                    "relative inline-flex items-center ml-2",
+                    "hover:text-blue-600 focus:ring-0 focus:outline-none",
                     "filter-anchor",
                 ].join(" ")}
                 popoverTarget={`filter-${field}`}

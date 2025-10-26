@@ -5,6 +5,8 @@ import React, { useEffect, useMemo, useState } from "react";
 import { TableContext } from "./TableContext";
 import { ColumnDef, Row } from "./types";
 
+import "./table.css";
+
 type TableProviderProps = {
     children: React.ReactNode;
 };
