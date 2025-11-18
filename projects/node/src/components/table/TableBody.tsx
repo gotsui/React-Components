@@ -1,23 +1,58 @@
 "use client";
 
-import { useTable } from "./hooks";
+import { useEffect, useMemo } from "react";
+import { useColumnDefs, useFilter, useRows } from "./hooks";
+import { Row } from "./types";
 
-const TableBody = () => {
-    const { getColumnDefs, getFilteredRows } = useTable();
+type TableBodyProps = {
+    initialRows?: Row[];
+};
+
+const TableBody = ({
+    initialRows = [],
+}: TableBodyProps) => {
+    const { setRows, getTableRows } = useRows();
+    const { getColumnDefs } = useColumnDefs();
+    const { getColumnFilterMap } = useFilter();
+
+    useEffect(() => {
+        setRows(initialRows);
+    }, []);
+
+    // フィルター適用をフィルター設定時に限定
+    const filteredRowIds = useMemo(() => {
+        return getTableRows().filter(
+            (tableRow) => getColumnDefs().every(
+                (def) => !getColumnFilterMap().get(def.field)?.has(String(tableRow.row[def.field]))
+            )
+        ).map(({ rowId }) => rowId);
+    }, [getColumnDefs, getColumnFilterMap]);
+
+    const filteredRows = getTableRows().filter(({ rowId }) => filteredRowIds.includes(rowId));
 
     return (
         <tbody>
-            {getFilteredRows().map((row, rowIndex) => (
-                <tr key={rowIndex}  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
-                    {getColumnDefs().map((def) => (
+            {filteredRows.map((tableRow, rowIndex) => (
+                <tr key={tableRow.rowId}  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                    {getColumnDefs().map((def, columnIndex) => (
                         <td
-                            key={def.field}
+                            key={columnIndex}
                             className={[
-                                "px-4 py-2 border-r text-xs",
+                                "border-r text-xs",
                                 `${rowIndex > 0 && "border-t"}`,
                             ].join(" ")}
                         >
-                            {row[def.field]}
+                            {def.cellRenderer ? (
+                                def.cellRenderer({
+                                    value: tableRow.row[def.field],
+                                    field: def.field,
+                                    tableRow,
+                                })
+                            ) : (
+                                <span className="block mx-4 my-2">
+                                    {tableRow.row[def.field]}
+                                </span>
+                            )}
                         </td>
                     ))}
                 </tr>

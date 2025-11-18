@@ -1,8 +1,8 @@
-import Template from "./Template";
+import Provider from "./Provider";
 
 const TablePage = () => {
     return (
-        <Template />
+        <Provider />
     );
 };
 
