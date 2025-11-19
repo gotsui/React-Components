@@ -1,10 +1,8 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useState } from "react";
 
 import { FilterContext } from "./FilterContext";
-import { useColumnDefs, useRows } from "./hooks";
-import { Row } from "./types";
 
 type FilterProviderProps = {
     children: React.ReactNode;

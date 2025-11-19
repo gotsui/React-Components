@@ -2,7 +2,7 @@
 
 import Checkbox from "./Checkbox";
 import FilterSvg from "./FilterSvg";
-import { useColumnDefs, useFilter, useRows } from "./hooks";
+import { useFilter, useRows } from "./hooks";
 
 type ColumnFilterProps = {
     field: string;
@@ -14,7 +14,7 @@ const ColumnFilter = ({
     const { getTableRows } = useRows();
     const { setColumnFilterMap, getColumnFilterMap } = useFilter();
 
-    const uniqueData = new Set(getTableRows().map((tableRow) => String(tableRow.row[field])));
+    const uniqueData = new Set(getTableRows().map((tableRow) => String(tableRow.row[field] ?? "")));
     const columnFilter = getColumnFilterMap().get(field) ?? new Set();
 
     const handleChangeAll = () => {

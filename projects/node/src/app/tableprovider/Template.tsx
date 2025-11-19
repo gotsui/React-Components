@@ -11,7 +11,7 @@ const initialRows: Row[] = [
 ];
 
 const Template = () => {
-    const { setTableRows } = useRows();
+    const { setTableRows, createRowId } = useRows();
 
     const inputRenderer: CellRenderer = (params) => {
         return (
@@ -21,7 +21,13 @@ const Template = () => {
                 onChange={(e) => setTableRows(
                     (prev) => prev.map(
                         (tableRow) => tableRow.rowId === params.tableRow.rowId
-                            ? { ...tableRow, row: { ...tableRow.row, [params.field]: e.target.value } }
+                            ? {
+                                ...tableRow,
+                                row: {
+                                    ...tableRow.row,
+                                    [params.field]: e.target.value
+                                },
+                            }
                             : tableRow
                     )
                 )}
@@ -29,18 +35,47 @@ const Template = () => {
         );
     };
 
+    const deleteRenderer: CellRenderer = (params) => {
+        return (
+            <button
+                className={[
+                    "px-4 py-2 text-red-500 cursor-pointer",
+                    "hover:text-red-600 hover:underline",
+                ].join(" ")}
+                onClick={() => setTableRows(
+                    (prev) => prev.filter(
+                        (tableRow) => tableRow.rowId !== params.tableRow.rowId
+                    )
+                )}
+            >
+                削除
+            </button>
+        );
+    };
+
     const columnDefs: ColumnDef[] = [
         { label: "Make", field: "make", filter: true },
         { label: "Model", field: "model", filter: true },
         { label: "Price", field: "price", filter: true, cellRenderer: inputRenderer},
+        { label: "delete", field: "delete", cellRenderer: deleteRenderer},
     ];
 
     return (
-        <Table
-            initialColumnDefs={columnDefs}
-            initialRows={initialRows}
-            caption="test"
-        />
+        <div className="flex flex-col items-center p-4 space-y-4">
+            <button
+                className="self-start p-4 outline hover:bg-gray-100"
+                onClick={() => setTableRows(
+                    (prev) => prev.concat({ rowId: createRowId(), row: {} })
+                )}
+            >
+                +
+            </button>
+            <Table
+                initialColumnDefs={columnDefs}
+                initialRows={initialRows}
+                caption="test"
+            />
+        </div>
     )
 };
 

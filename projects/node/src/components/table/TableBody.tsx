@@ -20,15 +20,15 @@ const TableBody = ({
     }, []);
 
     // フィルター適用をフィルター設定時に限定
-    const filteredRowIds = useMemo(() => {
+    const hiddenRowIds = useMemo(() => {
         return getTableRows().filter(
-            (tableRow) => getColumnDefs().every(
-                (def) => !getColumnFilterMap().get(def.field)?.has(String(tableRow.row[def.field]))
+            (tableRow) => getColumnDefs().some(
+                (def) => getColumnFilterMap().get(def.field)?.has(String(tableRow.row[def.field] ?? ""))
             )
         ).map(({ rowId }) => rowId);
     }, [getColumnDefs, getColumnFilterMap]);
 
-    const filteredRows = getTableRows().filter(({ rowId }) => filteredRowIds.includes(rowId));
+    const filteredRows = getTableRows().filter(({ rowId }) => !hiddenRowIds.includes(rowId));
 
     return (
         <tbody>
@@ -44,13 +44,13 @@ const TableBody = ({
                         >
                             {def.cellRenderer ? (
                                 def.cellRenderer({
-                                    value: tableRow.row[def.field],
+                                    value: tableRow.row[def.field] ?? "",
                                     field: def.field,
                                     tableRow,
                                 })
                             ) : (
                                 <span className="block mx-4 my-2">
-                                    {tableRow.row[def.field]}
+                                    {tableRow.row[def.field] ?? ""}
                                 </span>
                             )}
                         </td>

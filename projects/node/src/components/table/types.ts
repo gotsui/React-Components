@@ -9,7 +9,7 @@ export type ColumnDef = {
 };
 
 export type Row = {
-    [k: string]: boolean | number | string;
+    [k: string]: boolean | number | string | undefined;
 };
 
 export type TableRow = {
