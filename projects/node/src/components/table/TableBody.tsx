@@ -32,14 +32,24 @@ const TableBody = ({
 
     return (
         <tbody>
-            {filteredRows.map((tableRow, rowIndex) => (
-                <tr key={tableRow.rowId}  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+            {filteredRows.map((tableRow) => (
+                <tr
+                    key={tableRow.rowId}
+                    className={[
+                        "group bg-white hover:bg-blue-50",
+                        "dark:bg-gray-800",
+                    ].join(" ")}
+                >
                     {getColumnDefs().map((def, columnIndex) => (
                         <td
                             key={columnIndex}
                             className={[
-                                "border-r text-xs",
-                                `${rowIndex > 0 && "border-t"}`,
+                                "border-r border-b text-xs",
+                                "border-gray-400",
+                                "dark:border-gray-700",
+                                "[:first-child]:border-l",
+                                "group-last:[:first-child]:rounded-bl-lg",
+                                "group-last:[:last-child]:rounded-br-lg",
                             ].join(" ")}
                         >
                             {def.cellRenderer ? (

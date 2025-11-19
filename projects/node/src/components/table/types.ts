@@ -17,9 +17,9 @@ export type TableRow = {
     row: Row;
 };
 
-export type CellRenderer = (props: CellProperties) => JSX.Element;
+export type CellRenderer = (props: CellProps) => JSX.Element;
 
-export type CellProperties = {
+export type CellProps = {
     value: boolean | number | string;
     field: string;
     tableRow: TableRow;
