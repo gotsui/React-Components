@@ -27,12 +27,9 @@ const TableHead = ({
                         key={def.field}
                         className={[
                             "px-4 py-2 text-xs",
-                            "border-t border-r border-b",
+                            "border-b border-r",
                             "border-gray-400",
                             "dark:border-gray-700",
-                            "[:first-child]:border-l",
-                            "[:first-child]:rounded-tl-lg",
-                            "[:last-child]:rounded-tr-lg",
                         ].join(" ")}
                     >
                         <div

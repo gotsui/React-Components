@@ -44,12 +44,9 @@ const TableBody = ({
                         <td
                             key={columnIndex}
                             className={[
-                                "border-r border-b text-xs",
-                                "border-gray-400",
+                                "text-xs border-gray-400",
+                                "border-b border-r",
                                 "dark:border-gray-700",
-                                "[:first-child]:border-l",
-                                "group-last:[:first-child]:rounded-bl-lg",
-                                "group-last:[:last-child]:rounded-br-lg",
                             ].join(" ")}
                         >
                             {def.cellRenderer ? (

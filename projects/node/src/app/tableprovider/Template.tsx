@@ -61,7 +61,7 @@ const Template = () => {
     ];
 
     return (
-        <div className="flex flex-col items-center p-4 space-y-4">
+        <div className="flex flex-col h-screen w-screen space-y-4 p-4">
             <button
                 className="self-start p-4 outline hover:bg-gray-100"
                 onClick={() => setTableRows(
@@ -70,11 +70,13 @@ const Template = () => {
             >
                 +
             </button>
-            <Table
-                initialColumnDefs={columnDefs}
-                initialRows={initialRows}
-                caption="test"
-            />
+            <div className="flex-1 max-h-70">
+                <Table
+                    initialColumnDefs={columnDefs}
+                    initialRows={initialRows}
+                    caption="test"
+                />
+            </div>
         </div>
     )
 };
