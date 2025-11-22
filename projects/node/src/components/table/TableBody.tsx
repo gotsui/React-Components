@@ -44,7 +44,7 @@ const TableBody = ({
                         <td
                             key={columnIndex}
                             className={[
-                                "text-xs border-gray-400",
+                                "text-xs border-gray-300",
                                 "border-b border-r",
                                 "dark:border-gray-700",
                             ].join(" ")}

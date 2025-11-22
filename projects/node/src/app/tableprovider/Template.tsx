@@ -5,9 +5,10 @@ import { CellRenderer, ColumnDef, Row } from "@/components/table/types";
 import { useRows } from "@/components/table/hooks";
 
 const initialRows: Row[] = [
-    { make: "Toyota", model: "Celica", price: 35000 },
-    { make: "Ford", model: "Mondeo", price: 32000 },
-    { make: "Porsche", model: "Boxter", price: 72000 },
+    { field: "id", label: "フローID" },
+    { field: "name", label: "フロー名", filter: true },
+    { field: "createdAt", label: "作成日" },
+    { field: "updatedAt", label: "更新日" },
 ];
 
 const Template = () => {
@@ -25,7 +26,7 @@ const Template = () => {
                                 ...tableRow,
                                 row: {
                                     ...tableRow.row,
-                                    [params.field]: e.target.value
+                                    [params.field]: e.target.value,
                                 },
                             }
                             : tableRow
@@ -53,11 +54,45 @@ const Template = () => {
         );
     };
 
+    const checkboxRenderer: CellRenderer = (params) => {
+        const checked = typeof params.value === "boolean" ? params.value : false;
+
+        const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+            setTableRows(
+                (prev) => prev.map(
+                    (tableRow) => tableRow.rowId === params.tableRow.rowId
+                        ? {
+                            ...tableRow,
+                            row: {
+                                ...tableRow.row,
+                                [params.field]: e.target.checked,
+                            }
+                        }
+                        : tableRow
+                )
+            );
+        };
+
+        return (
+            <label className="flex items-center gap-4 p-2 cursor-pointer">
+                <input
+                    type="checkbox"
+                    checked={checked}
+                    onChange={handleChange}
+                    className="size-4 accent-cyan-300 rounded-lg"
+                />
+                <span className="">
+                    {checked ? "あり" : "なし"}
+                </span>
+            </label>
+        );
+    };
+
     const columnDefs: ColumnDef[] = [
-        { label: "Make", field: "make", filter: true },
-        { label: "Model", field: "model", filter: true },
-        { label: "Price", field: "price", filter: true, cellRenderer: inputRenderer},
-        { label: "delete", field: "delete", cellRenderer: deleteRenderer},
+        { field: "field", label: "カラム名" },
+        { field: "label", label: "ラベル", cellRenderer: inputRenderer },
+        { field: "filter", label: "フィルター", cellRenderer: checkboxRenderer },
+        { field: "delete", label: "削除", cellRenderer: deleteRenderer },
     ];
 
     return (

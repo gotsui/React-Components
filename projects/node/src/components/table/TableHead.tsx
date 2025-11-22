@@ -21,14 +21,14 @@ const TableHead = ({
 
     return (
         <thead className="sticky top-0 z-10">
-            <tr className="bg-gray-200">
+            <tr className="bg-gray-50">
                 {getColumnDefs().map((def) => (
                     <th
                         key={def.field}
                         className={[
                             "px-4 py-2 text-xs",
                             "border-b border-r",
-                            "border-gray-400",
+                            "border-gray-300",
                             "dark:border-gray-700",
                         ].join(" ")}
                     >

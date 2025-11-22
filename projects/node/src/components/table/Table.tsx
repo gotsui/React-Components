@@ -29,7 +29,7 @@ const Table = ({
                     {caption}
                 </figcaption>
             )}
-            <div className="flex-1 flex flex-col overflow-hidden rounded-lg border border-gray-400">
+            <div className="flex-1 flex flex-col overflow-hidden rounded-lg border border-gray-300">
                 <div className="flex-1 whitespace-nowrap overflow-auto mb-[-1px] mr-[-1px]">
                     <table className="table-auto border-separate border-spacing-0 w-full">
                         <TableHead initialColumnDefs={initialColumnDefs} />
